@@ -1,0 +1,29 @@
+.signOutButton 
+{
+    display: flex;
+    justify-content: flex-end;
+}
+.signOutButton button 
+{
+    color: white;
+    border-color: black;
+    box-shadow: 0 0 40px 40px black inset, 0 0 0 0 black;
+    transition: all 150ms ease-in-out;
+    background-color: black;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    border: none;
+    cursor: pointer;
+}
+.signOutButton button:hover
+{
+    transform: scale(1.02);
+}
+.link button 
+{
+    color: white;
+    background: none;
+    background-color: black;    
+    border-style:double;
+    border-radius: 2px;
+}

@@ -11,6 +11,7 @@
 .signUpForm {
     padding-inline: 2rem;
     border-radius: 0.6rem;
+    box-shadow: white 0px 0px 10px;
     display: grid;
     grid-template-rows: 1fr 2fr 7fr;
     align-items: center;
