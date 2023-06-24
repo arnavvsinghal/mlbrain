@@ -1,0 +1,68 @@
+.formCard {
+    background-color: #1f1f1f;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpForm {
+    padding-inline: 2rem;
+    border-radius: 0.6rem;
+    display: grid;
+    grid-template-rows: 1fr 2fr 7fr;
+    align-items: center;
+    background-color: white;
+}
+
+.signUpForm .signUp {
+    text-align: right;
+}
+
+.signUpForm .signUp p {
+    display: inline-block;
+    color: #808080;
+}
+
+.signUpForm .mail input,
+.pass input {
+    height: 2rem;
+    border-color: hwb(0 12% 88%);
+    border-width: 1.5px;
+    border-radius: 5px;
+    padding-left: 0.5rem;
+}
+
+.signUpForm .loginButton {
+    color: white;
+    border-color: black;
+    box-shadow: 0 0 40px 40px black inset, 0 0 0 0 black;
+    transition: all 150ms ease-in-out;
+    background-color: black;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.signUpForm .loginButton:hover {
+    transform: scale(1.02);
+}
+
+.signUpForm .form {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1.5fr 1.5fr 3fr;
+    align-items: center;
+}
+
+.signUpForm input {
+    width: 100%;
+    box-sizing: border-box;
+    justify-self: center;
+    font: 100;
+}
