@@ -19,11 +19,3 @@
 {
     transform: scale(1.02);
 }
-.link button 
-{
-    color: white;
-    background: none;
-    background-color: black;    
-    border-style:double;
-    border-radius: 2px;
-}

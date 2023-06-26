@@ -4,7 +4,6 @@ import './sigin.css'
 import Group from '../Signin/images/Group.png';
 export default class Signin extends Component {
     render() {
-        console.log(window.innerWidth);
         return (
             <div className='signIn'>
                 <div className='image'>

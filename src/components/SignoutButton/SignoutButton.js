@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './main.css'
+import './signoutbutton.css'
 export default class Main extends Component {
     render() {
         return (
@@ -7,12 +7,6 @@ export default class Main extends Component {
                 <div className='signOutButton'>
                     <button>Sign Out</button>
                 </div>
-            <div className='link'>
-                <div className='search'>
-                <input type='text'/>
-                <button>Detect</button>
-                </div>
-            </div>
             </div>
         )
     }

@@ -1,0 +1,8 @@
+.link button 
+{
+    color: white;
+    background: none;
+    background-color: black;    
+    border-style:double;
+    border-radius: 2px;
+}
