@@ -5,3 +5,9 @@
     justify-content: center;
     cursor: pointer;
 }
+.instructions
+{
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+}
