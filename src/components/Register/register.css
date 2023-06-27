@@ -1,69 +1,77 @@
-.formCard {
+.registerformCard {
     background-color: #1f1f1f;
     min-height: 100vh;
-    box-sizing: border-box;
     display: grid;
     grid-template-columns: 80%;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    
 }
 
-.signUpForm {
+.registersignUpForm {
     padding-inline: 2rem;
+    padding-top: 1rem;
+    /* padding-bottom: 1rem; */
+    box-sizing: border-box;
     border-radius: 0.6rem;
     box-shadow: white 0px 0px 10px;
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows:auto 0.01fr 1fr;
     align-items: center;
     background-color: white;
 }
 
-.signUpForm .signUp {
+.registersignUpForm .registersignUp {
     text-align: right;
 }
 
-.signUpForm .signUp p {
+.registersignUpForm .registersignUp p {
     display: inline-block;
     color: #808080;
 }
 
-.signUpForm .mail input,
-.pass input {
+.registersignUpForm .registermail input,
+.registerpass input, .registername input {
     height: 2rem;
     border-color: hwb(0 12% 88%);
     border-width: 1.5px;
     border-radius: 5px;
     padding-left: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-.signUpForm .loginButton {
+.registersignUpForm .registerloginButton {
     color: white;
     border-color: black;
     box-shadow: 0 0 40px 40px black inset, 0 0 0 0 black;
     transition: all 150ms ease-in-out;
     background-color: black;
     border-radius: 0.5rem;
+    box-sizing: border-box;
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem;
+    /* margin-top: 1rem;
+    margin-bottom: 1rem; */
     border: none;
     cursor: pointer;
 }
 
-.signUpForm .loginButton:hover {
+.registersignUpForm .registerloginButton:hover {
     transform: scale(1.02);
 }
 
-.signUpForm .form {
+.registersignUpForm .registerform {
     display: grid;
     height: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr 1.5fr 1.5fr 3fr;
+    grid-template-rows: auto 1fr 1fr 1fr 2fr;
+    /* grid-gap: 1rem; */
     align-items: center;
 }
 
-.signUpForm input {
+.registersignUpForm input {
     width: 100%;
-    box-sizing: border-box;
     justify-self: center;
     font: 100;
 }

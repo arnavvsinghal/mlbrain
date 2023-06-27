@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Signin from './components/Signin/Signin';
-import SignoutButton from './components/SignoutButton/SignoutButton';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import backgroundimg from './Group.png';
+// import SignoutButton from './components/SignoutButton/SignoutButton';
+// import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+// import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+// import backgroundimg from './Group.png';
+import Registerpage from './components/Registerpage/Registerpage';
 import './App.css';
 
 const setupAPIRequest = (imageURL) => {
@@ -88,20 +89,21 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div className='App'>
-        {/* <Signin /> */}
-        <SignoutButton />
+        <Registerpage/>
+      // <div className='App'>
+        // <Signin />
+        /*<SignoutButton />
         <div className='apiWrapper'>
           <div className='submitButton'>
             <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
             <FaceRecognition imageURL={this.state.imageURL} box={this.state.box} instructions={this.state.instructions}/>
           </div>
           <div className='img-container'>
-            <p className='instructions'>Make sure the image links end with jpg or png. Smiley!</p>
+            <p className='appInstructions'>Make sure the image links end with jpg or png. Smiley!</p>
             <img alt='' src={backgroundimg} />
           </div>
-        </div>
-      </div>
+        </div> */
+      // </div>
     )
   }
 }
