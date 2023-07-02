@@ -1,12 +1,49 @@
 import React, { Component } from 'react'
 import './form.css';
 export default class Form extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            signinEmail: '',
+            signinPassword: ''
+        }
+    }
+
+    onSigninEmail = (event) => {
+        this.setState({ signinEmail: event.target.value });
+    }
+
+    onSigninPassword = (event) => {
+        this.setState({ signinPassword: event.target.value });
+    }
+
+    onSubmitSignin = () => {
+        fetch('http://localhost:3000/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: this.state.signinEmail,
+                password: this.state.signinPassword
+            })
+        })
+        .then(resp=> resp.json())
+        .then(data => {
+            console.log('signinData',data);
+                if (data.id) {
+                    this.props.loadUser(data);
+                    console.log(data);
+                    this.props.routeChange('main');
+                }
+            })
+        // console.log(this.state);
+    }
     render() {
+
         return (
             <div className="formCard">
                 <div className='signUpForm'>
                     <div className='signUp'>
-                        <p>Dont Have an account? </p><span> Sign Up! </span>
+                        <p>Dont Have an account? </p><span onClick={() => this.props.routeChange('register')} style={{ cursor: 'pointer' }}> Sign Up! </span>
                     </div>
                     <h1>Welcome</h1>
 
@@ -19,6 +56,7 @@ export default class Form extends Component {
                                 name="email-address"
                                 id="email-address"
                                 placeholder='Your email address'
+                                onChange={this.onSigninEmail}
                             />
                         </div>
                         <div className='pass'>
@@ -28,6 +66,7 @@ export default class Form extends Component {
                                 name="password"
                                 id="password"
                                 placeholder='Your password'
+                                onChange={this.onSigninPassword}
                             />
                         </div>
                         <div className="">
@@ -35,6 +74,7 @@ export default class Form extends Component {
                                 className='loginButton'
                                 type="submit"
                                 value="Log in"
+                                onClick={this.onSubmitSignin}
                             />
                         </div>
                     </div>

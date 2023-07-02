@@ -7,7 +7,7 @@ export default class ImageLinkForm extends Component {
             <div className='link'>
                 <div className='search'>
                     <input type='text' onChange={onInputChange} />
-                    <button onClick={onButtonSubmit}>Detect</button>
+                    <button onClick={onButtonSubmit} style={{cursor:'pointer'}}>Detect</button>
                 </div>
             </div>
         )

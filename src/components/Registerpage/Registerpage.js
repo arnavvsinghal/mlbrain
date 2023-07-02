@@ -14,7 +14,7 @@ export default class Registerpage extends Component {
                         <img src={Group} alt='background' />
                     </div>
                     <div className='signInForm'>
-                        <Register />
+                        <Register loadUser={this.props.loadUser} routeChange={this.props.routeChange}/>
                     </div>
                 </div>
             </div>

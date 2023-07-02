@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Signin from './components/Signin/Signin';
-// import SignoutButton from './components/SignoutButton/SignoutButton';
-// import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-// import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-// import backgroundimg from './Group.png';
+import SignoutButton from './components/SignoutButton/SignoutButton';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import backgroundimg from './Group.png';
 import Registerpage from './components/Registerpage/Registerpage';
 import './App.css';
 
@@ -45,9 +45,20 @@ export default class App extends Component {
       input: '',
       imageURL: '',
       box: {},
-      instructions:'Hey there! Paste an image link in the search box above and click "Detect".',
+      instructions: 'Hey there! Paste an image link in the search box above and click "Detect".',
+      route: 'signin',
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        password: '',
+        entries: 0,
+        joined: '',
+      }
     }
   }
+
   calculateFaceLocation = (data) => {
     const face = data.outputs[0].data.regions[0].region_info.bounding_box;
     console.log(face);
@@ -69,7 +80,18 @@ export default class App extends Component {
     this.setState({ box: box });
     console.log(box);
   }
-
+  loadUser = (userData) => {
+    this.setState({
+      user: {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        password: userData.password,
+        entries: userData.entries,
+        joined: userData.joined
+      }
+    });
+  }
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
     console.log(event.target.value);
@@ -81,29 +103,52 @@ export default class App extends Component {
     console.log('click submit');
     fetch(`https://api.clarifai.com/v2/models/face-detection/outputs`, setupAPIRequest(this.state.input))
       .then(response => response.json())
-      .then(result => this.displayFaceBox(this.calculateFaceLocation(result)))
+      .then(result => {
+        if (result) {
+          console.log('result',result);
+          console.log(123);
+          fetch('http://localhost:3000/image', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          }).then(res => res.json())
+            .then(count => this.setState(Object.assign(this.state.user,{entries:count})));
+        }
+        this.displayFaceBox(this.calculateFaceLocation(result))
+      })
       .catch((error) => {
         console.log(error);
-        this.setState({instructions:'Invalid URL! Please try again.'});
+        this.setState({ instructions: 'Invalid URL! Please try again.' });
       });
   }
+  routeChange = (route) => {
+    this.setState({ route: route });
+  }
   render() {
-    return (
-        <Registerpage/>
-      // <div className='App'>
-        // <Signin />
-        /*<SignoutButton />
-        <div className='apiWrapper'>
-          <div className='submitButton'>
-            <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-            <FaceRecognition imageURL={this.state.imageURL} box={this.state.box} instructions={this.state.instructions}/>
+    if (this.state.route === 'signin') {
+      return (<Signin loadUser={this.loadUser} routeChange={this.routeChange} />);
+    }
+    else if (this.state.route === 'register') {
+      return (<Registerpage loadUser={this.loadUser} routeChange={this.routeChange} />);
+    }
+    else if (this.state.route === 'main') {
+      return (
+        <div className='App'>
+          <SignoutButton routeChange={this.routeChange} />
+          <div className='apiWrapper'>
+            <div className='submitButton'>
+              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+              <FaceRecognition imageURL={this.state.imageURL} box={this.state.box} instructions={this.state.instructions} />
+            </div>
+            <div className='img-container'>
+              <p className='appInstructions'>Make sure the image links end with jpg or png. Smiley!</p>
+              <img alt='' src={backgroundimg} />
+            </div>
           </div>
-          <div className='img-container'>
-            <p className='appInstructions'>Make sure the image links end with jpg or png. Smiley!</p>
-            <img alt='' src={backgroundimg} />
-          </div>
-        </div> */
-      // </div>
-    )
+        </div>
+      );
+    }
   }
 }

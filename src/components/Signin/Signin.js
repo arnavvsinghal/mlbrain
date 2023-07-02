@@ -13,7 +13,7 @@ export default class Signin extends Component {
                     <img src={Group} alt='background' />
                 </div>
                 <div className='signInForm'>
-                    <Form />
+                    <Form loadUser={this.props.loadUser} routeChange={this.props.routeChange}/>
                 </div>
             </div>
         )
