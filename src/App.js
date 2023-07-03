@@ -38,25 +38,27 @@ const setupAPIRequest = (imageURL) => {
   };
   return requestOptions;
 }
+
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  instructions: 'Hey there! Paste an image link in the search box above and click "Detect".',
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+    entries: 0,
+    joined: '',
+  }
+};
 export default class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      instructions: 'Hey there! Paste an image link in the search box above and click "Detect".',
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        password: '',
-        entries: 0,
-        joined: '',
-      }
-    }
+    this.state =initialState;
   }
 
   calculateFaceLocation = (data) => {
@@ -105,8 +107,8 @@ export default class App extends Component {
       .then(response => response.json())
       .then(result => {
         if (result) {
-          console.log('result',result);
-          console.log(123);
+          // console.log('result', result);
+          // console.log(123);
           fetch('http://localhost:3000/image', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -114,7 +116,7 @@ export default class App extends Component {
               id: this.state.user.id
             })
           }).then(res => res.json())
-            .then(count => this.setState(Object.assign(this.state.user,{entries:count})));
+            .then(count => this.setState(Object.assign(this.state.user, { entries: count })));
         }
         this.displayFaceBox(this.calculateFaceLocation(result))
       })
@@ -124,10 +126,14 @@ export default class App extends Component {
       });
   }
   routeChange = (route) => {
+    if(route==='signin'){
+      this.setState(initialState);
+    }
     this.setState({ route: route });
   }
   render() {
     if (this.state.route === 'signin') {
+      // this.setState({state:initialState});
       return (<Signin loadUser={this.loadUser} routeChange={this.routeChange} />);
     }
     else if (this.state.route === 'register') {
