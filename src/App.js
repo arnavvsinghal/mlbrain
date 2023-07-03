@@ -107,8 +107,6 @@ export default class App extends Component {
       .then(response => response.json())
       .then(result => {
         if (result) {
-          // console.log('result', result);
-          // console.log(123);
           fetch('http://localhost:3000/image', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -133,7 +131,6 @@ export default class App extends Component {
   }
   render() {
     if (this.state.route === 'signin') {
-      // this.setState({state:initialState});
       return (<Signin loadUser={this.loadUser} routeChange={this.routeChange} />);
     }
     else if (this.state.route === 'register') {
