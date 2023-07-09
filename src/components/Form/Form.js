@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './form.css';
+////////////////////////////////HIGHLY RECOMMENDED TO READ THE REGISTER.JS FILE COMMENTS FOR UNDERSTANDING THE WORKINGS HERE////////////////////////////////
 export default class Form extends Component {
     constructor(props) {
         super(props);
@@ -26,9 +27,9 @@ export default class Form extends Component {
                 password: this.state.signinPassword
             })
         })
-        .then(resp=> resp.json())
-        .then(data => {
-            console.log('signinData',data);
+            .then(resp => resp.json())
+            .then(data => {
+                console.log('signinData', data);
                 if (data.id) {
                     this.props.loadUser(data);
                     console.log(data);

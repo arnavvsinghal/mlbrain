@@ -9,6 +9,9 @@ export default class Register extends Component {
             registerPassword: ''
         }
     }
+    ////////////////////////////////super() vs super(props)////////////////////////////////
+    // super(props):-This is necessary if you want to access this.props within the constructor
+    //super():-This is necessary if you DONT want to access this.props within the constructor
     onNameChange = (event) => {
         this.setState({ registerName: event.target.value });
         console.log(event.target.value);
@@ -22,6 +25,7 @@ export default class Register extends Component {
         console.log(event.target.value)
     }
     onSubmitRegister = () => {
+        //This sends the POST request to the server to register the user.
         fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -29,15 +33,20 @@ export default class Register extends Component {
                 name: this.state.registerName,
                 email: this.state.registerEmail,
                 password: this.state.registerPassword
-            })})
-                .then(res => res.json())
-                .then(user => {
-                    if (user.id) {
-                        this.props.loadUser(user);
-                        this.props.routeChange('signin');
-                    }
-                })
-        }
+                //The data to be sent to the server is first converted into JSON string.
+            })
+        })
+            .then(res => res.json())
+            // The response is then converted into JS Object.
+            .then(user => {
+                if (user.id) {
+                    // If the registration was successful, the server will return the user credentials. Hence to check if the registration was successful, we can check if the response contains 'id' parameter or not.
+                    this.props.loadUser(user);
+                    this.props.routeChange('signin');
+                }
+            })
+    }
+    ////////////////////////////////REST IS SELF-EXPLANATORY////////////////////////////////
     render() {
         const { routeChange } = this.props;
         return (
